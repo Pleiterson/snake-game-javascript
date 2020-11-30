@@ -16,7 +16,7 @@ let food = {
 }
 
 function createBG() {
-    context.fillStyle = "lightgreen";
+    context.fillStyle = "white";
     context.fillRect(0,0,16 * box, 16 * box); // desenha o retângulo usando x e y e a largura e altura setadas
 }
 
