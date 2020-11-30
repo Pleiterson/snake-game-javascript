@@ -1,4 +1,4 @@
-let canvas = document.getElementById("snake");
+let canvas = document.getElementById("snake"); // criar elemento que irá rodar o jogo
 let context = canvas.getContext("2d");
 let box = 32;
 
@@ -7,6 +7,8 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 }
+
+let direction = "right";
 
 function createBG() {
     context.fillStyle = "lightgreen";
@@ -20,5 +22,27 @@ function createSnake() {
     }
 }
 
-createBG();
-createSnake();
+function startGame() {
+    createBG();
+    createSnake();
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    if( direction == "right") snakeX += box;
+    if (direction == "left") snakeX -= box;
+    if (direction == "up") snakeY -= box;
+    if (direction == "down") snakeY += box;
+
+    snake.pop(); // pop tira o último elemento da lista
+
+    let newHead ={
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead); // método unshift adiciona o primeiro quadrado da cobrinha
+}
+
+
+let game = setInterval(startGame, 100);
