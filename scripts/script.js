@@ -6,7 +6,7 @@ let snake = []; // criar cobrinha como lista, já que ela vai ser uma série de 
 snake[0] = {
     x: 8 * box,
     y: 8 * box
-}
+};
 
 let direction = "right";
 
@@ -22,7 +22,21 @@ function createSnake() {
     }
 }
 
+document.addEventListener('keydown', update); // quando um evento acontece, detecta e chama uma função
+
+function update(event) {
+    if (event.keyCode == 37 && direction != 'right') direction = 'left';
+    if (event.keyCode == 38 && direction != 'down') direction = 'up';
+    if (event.keyCode == 39 && direction != 'left') direction = 'right';
+    if (event.keyCode == 40 && direction != 'up') direction = 'down';
+}
+
 function startGame() {
+    if (snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
+    if (snake[0].x < 0 && direction == 'left') snake[0].x = 16 * box;
+    if (snake[0].y > 15 * box && direction == "down") snake[0].y = 0;
+    if (snake[0].y < 0 && direction == 'up') snake[0].y = 16 * box;
+
     createBG();
     createSnake();
 
@@ -36,10 +50,10 @@ function startGame() {
 
     snake.pop(); // pop tira o último elemento da lista
 
-    let newHead ={
+    let newHead = {
         x: snakeX,
         y: snakeY
-    }
+    };
 
     snake.unshift(newHead); // método unshift adiciona o primeiro quadrado da cobrinha
 }
